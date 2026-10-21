@@ -1,0 +1,8 @@
+venv
+build
+dist
+data
+
+*.pyc
+*.spec
+*.log

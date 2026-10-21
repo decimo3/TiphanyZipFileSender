@@ -1,0 +1,33 @@
+# UTF-8
+#
+VSVersionInfo(
+  ffi=FixedFileInfo(
+    filevers=(${MAJOR_VERSION}, ${MINOR_VERSION}, ${PATCH_VERSION}, 0),  # Version of your application
+    prodvers=(${MAJOR_VERSION}, ${MINOR_VERSION}, ${PATCH_VERSION}, 0),  # Product version
+    mask=0x3f,
+    flags=0x0,
+    OS=0x40004,  # Windows NT and Win32
+    fileType=0x1,  # Executable file
+    subtype=0x0,
+    date=(0, 0)
+  ),
+  kids=[
+    StringFileInfo(
+      [
+      StringTable(
+        u'040904B0',  # Language and codepage
+        [
+          StringStruct(u'CompanyName', u'MestreRuan'),
+          StringStruct(u'FileDescription', u'A program for consolidating PDFs contained within ZIP files.'),
+          StringStruct(u'FileVersion', u'${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}.0'),
+          StringStruct(u'InternalName', u'TiphanyZipFilePdfMerge'),
+          StringStruct(u'LegalCopyright', u'MestreRuan (C). All rights reserved.'),
+          StringStruct(u'OriginalFilename', u'ZIP_BOT.exe'),
+          StringStruct(u'ProductName', u'ZIP_BOT'),
+          StringStruct(u'ProductVersion', u'${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}.0')
+        ])
+      ]
+    ),
+    VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
+  ]
+)

@@ -21,9 +21,15 @@ class MissingContentError(BaseException):
 
 EXPECTED_ARGUMENT_COUNT = 3
 
+BASE_FOLDER: Path = Path(
+    os.path.dirname(sys.executable)
+    if getattr(sys, 'frozen', False) else
+    os.path.dirname(os.path.abspath(__file__))
+)
+
 if __name__ == '__main__':
     exit_code = 0
-    logs_path = Path('logs')
+    logs_path = BASE_FOLDER / 'logs'
     if not logs_path.exists():
         logs_path.mkdir(exist_ok=True)
     logs_path = logs_path / 'zip_bot.log'
@@ -37,7 +43,7 @@ if __name__ == '__main__':
     logger.addHandler(log_handler)
     logger.setLevel(logging.NOTSET)
     try:
-        load_dotenv()
+        load_dotenv(BASE_FOLDER / '.env')
         ZIP_FOLDER_PATHS = os.environ.get('ZIP_FOLDER_PATHS')
         if not ZIP_FOLDER_PATHS:
             raise FolderNotFoundError(

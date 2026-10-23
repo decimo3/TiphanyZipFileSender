@@ -41,7 +41,7 @@ if __name__ == '__main__':
     )
     log_handler.setFormatter(log_format)
     logger.addHandler(log_handler)
-    logger.setLevel(logging.NOTSET)
+    logger.setLevel(logging.INFO)
     try:
         logger.info('Iniciando aplicação zip_bot...')
         logger.info('Diretório base: %s', BASE_FOLDER)

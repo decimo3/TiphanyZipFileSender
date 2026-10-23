@@ -43,8 +43,12 @@ if __name__ == '__main__':
     logger.addHandler(log_handler)
     logger.setLevel(logging.NOTSET)
     try:
+        logger.info('Iniciando aplicação zip_bot...')
+        logger.info('Diretório base: %s', BASE_FOLDER)
+        logger.info('Registros salvos em %s', logs_path)
         load_dotenv(BASE_FOLDER / '.env')
         ZIP_FOLDER_PATHS = os.environ.get('ZIP_FOLDER_PATHS')
+        logger.info("ZIP_FOLDER_PATHS: %s", ZIP_FOLDER_PATHS)
         if not ZIP_FOLDER_PATHS:
             raise FolderNotFoundError(
                 '500: A pasta raiz não foi configurada!',
@@ -73,6 +77,7 @@ if __name__ == '__main__':
                 'Argumentos: [' + ', '.join(sys.argv) + ']'
             )
         filename = ZIP_FOLDER_PATHS / (identifier + '.zip')
+        logger.info("Abrindo arquivo: %s", filename)
         if not filename.exists():
             raise FileNotFoundError(
                 '404: O arquivo não foi encontrado! ',
@@ -92,7 +97,10 @@ if __name__ == '__main__':
                                 raise MissingContentError('500: O arquivo não pode ser lido!')
                             writer.append(reader)
                     writer.write(pdf_bytes)
-                print(base64.b64encode(pdf_bytes.getvalue()).decode('utf-8'))
+                logger.info("PDF combinado! Preparando Base64...")
+                result = base64.b64encode(pdf_bytes.getvalue()).decode('utf-8')
+                logger.info("Base64 gerado: %d caracteres", len(result))
+                print(result, flush=True)
     except (FolderNotFoundError, IncorrectArgumentError, MissingContentError) as e:
         logger.error(e.args)
         print(e.args[0], file=sys.stderr)
@@ -101,4 +109,5 @@ if __name__ == '__main__':
         logger.error('500: Aconteceu um erro ao obter o documento: %s', e)
         print('500: Aconteceu um erro ao obter o documento!', file=sys.stderr)
         exit_code = 1
+    logger.info('Programa encerrado!')
     sys.exit(exit_code)

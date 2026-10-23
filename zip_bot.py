@@ -4,7 +4,6 @@ import sys
 import zipfile
 import base64
 import logging
-from logging import handlers
 from pathlib import Path
 from io import BytesIO
 from dotenv import load_dotenv
